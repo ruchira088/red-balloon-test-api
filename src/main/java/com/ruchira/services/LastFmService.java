@@ -20,7 +20,7 @@ public class LastFmService
 
     private String getUrl(String p_queryParameters)
     {
-        return HOST_NAME + URL_PATH + "?" + p_queryParameters + "&" + API_KEY_PARAMETER + "=" + m_apiKey;
+        return HOST_NAME + URL_PATH + "?format=json&" + p_queryParameters + "&" + API_KEY_PARAMETER + "=" + m_apiKey;
     }
 
     public CompletableFuture<InputStream> perform(String p_queryParameters)

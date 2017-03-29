@@ -6,16 +6,28 @@ import java.io.OutputStream;
 
 public class Utils
 {
-    public static int copy(InputStream p_inputStream, OutputStream p_outputStream) throws IOException
+//    public static void copy1(InputStream p_inputStream, OutputStream p_outputStream) throws IOException
+//    {
+//        byte[] buffer = new byte[1024];
+//        int length;
+//
+//        while((length = p_inputStream.read(buffer)) != -1)
+//        {
+//            System.out.println(length);
+//            p_outputStream.write(buffer, 0, length);
+//        }
+//
+//    }
+
+    public static void copy(InputStream p_inputStream, OutputStream p_outputStream) throws IOException
     {
         byte[] buffer = new byte[1024];
-        int length;
+        int length = p_inputStream.read(buffer);
 
-        while((length = p_inputStream.read(buffer)) != -1)
+        if(length != -1)
         {
             p_outputStream.write(buffer, 0, length);
+            copy(p_inputStream, p_outputStream);
         }
-
-        return length;
     }
 }

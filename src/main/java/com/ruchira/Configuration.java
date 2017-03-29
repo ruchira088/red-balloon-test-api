@@ -7,10 +7,15 @@ import java.io.FileReader;
 
 public class Configuration
 {
-    public static String getApiKey() throws FileNotFoundException
+    public static String getApiKey()
     {
         File file = new File("apiKey.txt");
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return bufferedReader.lines().findFirst().get();
     }
 }
