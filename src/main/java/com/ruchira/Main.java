@@ -3,11 +3,9 @@ package com.ruchira;
 import com.ruchira.server.HttpWebServer;
 import com.ruchira.server.routes.ArtistRoute;
 import com.ruchira.server.routes.CountryRoute;
-import com.ruchira.services.LastFmQuery;
 import com.ruchira.services.LastFmService;
 
 import java.util.Map;
-import java.util.Scanner;
 
 public class Main
 {
