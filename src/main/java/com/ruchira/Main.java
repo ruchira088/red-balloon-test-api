@@ -7,6 +7,7 @@ import com.ruchira.services.LastFmQuery;
 import com.ruchira.services.LastFmService;
 
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main
 {
@@ -20,12 +21,6 @@ public class Main
         httpWebServer.route("/last-fm/country", new CountryRoute(lastFmService));
         httpWebServer.route("/last-fm/artist", new ArtistRoute(lastFmService));
 
-        httpWebServer.listen(8000);
-
-//        LastFmQuery lastFmQuery = new LastFmQuery(LastFmQuery.ApiMethod.GET_ARTIST);
-//        lastFmQuery.addParameter(LastFmQuery.QueryParameter.ARTIST, "cher");
-//
-//
-//        System.out.println(lastFmService.getUrl(lastFmQuery));
+        httpWebServer.listen(Integer.parseInt(configValues.get(Configuration.ConfigurationKey.HTTP_PORT)));
     }
 }

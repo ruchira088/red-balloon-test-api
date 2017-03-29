@@ -14,7 +14,8 @@ public class Configuration
     {
         HOST_NAME("lastFM.host"),
         URL_PATH("lastFM.apiVersion"),
-        API_KEY("lastFM.apiKey");
+        API_KEY("lastFM.apiKey"),
+        HTTP_PORT("server.httpPort");
 
         private String m_key;
 
