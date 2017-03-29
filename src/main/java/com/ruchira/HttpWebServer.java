@@ -1,6 +1,7 @@
 package com.ruchira;
 
 import com.ruchira.services.LastFmService;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -62,6 +63,8 @@ public class HttpWebServer
 
             try
             {
+                Headers responseHeaders = httpExchange.getResponseHeaders();
+                responseHeaders.add("Access-Control-Allow-Origin", "*");
                 httpExchange.getResponseHeaders().add("content-type", "application/json");
                 httpExchange.sendResponseHeaders(200, 0);
                 Utils.copy(inputStream, responseBody);
