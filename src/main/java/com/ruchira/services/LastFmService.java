@@ -1,31 +1,34 @@
 package com.ruchira.services;
 
+import com.ruchira.Configuration;
 import com.ruchira.HttpClient;
 
 import java.io.InputStream;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class LastFmService
 {
-    private final String API_KEY_PARAMETER = "api_key";
-    private final String HOST_NAME = "http://ws.audioscrobbler.com";
-    private final String URL_PATH = "/2.0/";
-
     private final String m_apiKey;
+    private final String m_hostName;
+    private final String m_apiVersion;
 
-    public LastFmService(String p_apiKey)
+    public LastFmService(Map<Configuration.ConfigurationKey, String> p_configValues)
     {
-        m_apiKey = p_apiKey;
+        m_apiKey = p_configValues.get(Configuration.ConfigurationKey.API_KEY);
+        m_hostName = p_configValues.get(Configuration.ConfigurationKey.HOST_NAME);
+        m_apiVersion = p_configValues.get(Configuration.ConfigurationKey.URL_PATH);
     }
 
-    private String getUrl(String p_queryParameters)
-    {
-        return HOST_NAME + URL_PATH + "?format=json&" + p_queryParameters + "&" + API_KEY_PARAMETER + "=" + m_apiKey;
-    }
-
-    public CompletableFuture<InputStream> perform(String p_queryParameters)
+    public CompletableFuture<InputStream> perform(LastFmQuery p_lastFmQuery)
     {
         HttpClient httpClient = new HttpClient();
-        return httpClient.getInputStream(getUrl(p_queryParameters));
+        return httpClient.getInputStream(getUrl(p_lastFmQuery));
+    }
+
+    public String getUrl(LastFmQuery p_lastFmQuery)
+    {
+        p_lastFmQuery.addParameter(LastFmQuery.QueryParameter.API_KEY, m_apiKey);
+        return m_hostName + "/" +  m_apiVersion + "?" + p_lastFmQuery.getQuery();
     }
 }
